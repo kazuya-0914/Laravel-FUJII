@@ -11,20 +11,28 @@ class HelloController extends Controller
     /**
      * Handle the incoming request.
      */
+
+    // 天気予報
     protected $weatherService;
+    protected $weatherData;
 
     public function __construct(WeatherService $weatherService)
     {
         $this->weatherService = $weatherService;
+        $this->weatherData = $this->weatherService->getWeatherData();
     }
+    // 天気予報ここまで
 
     public function __invoke(Request $request)
     {
-        // 天気予報
-        $weatherData = $this->weatherService->getWeatherData();
+        // ブレードバージョン
+        return view('index');
 
+        // Vue.jsバージョン
+        /*
         return Inertia::render('Hello', [
-           'weatherData' => $weatherData
+           'weatherData' => $this->weatherData
         ]);
+        */
     }
 }

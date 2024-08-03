@@ -6,16 +6,12 @@
   {{-- $productsのケース --}}
   @isset($products)
   @foreach ($products as $val)
-    @foreach ($columns as $column)
-    <div class= "h-full bg-sky-200">{{ $val->$column }}</div>
-    @endforeach
+    <x-product :columns="$columns" :product="$val" />
   @endforeach  
   @endisset
   {{-- $productのケース --}}
   @isset($product)
-  @foreach ($columns as $column)
-  <div class="h-full bg-sky-200">{{ $product->$column }}</div>
-  @endforeach
+  <x-product :columns="$columns" :product="$product" />
   @endisset
   </section>
 </x-base>

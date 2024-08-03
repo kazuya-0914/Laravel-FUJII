@@ -1,21 +1,11 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
+import { WeatherData } from '@/types/WeatherData';
 import { Link } from '@inertiajs/vue3';
 
+const props = defineProps<{ weatherData: Record<string, WeatherData> }>();
 const title: string = 'Laravel基礎';
 
-interface WeatherData {
-  japanese_name: string;
-  weather: { description: string; icon: string }[];
-  main: { temp: number };
-  wind: { speed: number };
-}
-
-interface WeatherProps {
-  [key: string]: WeatherData;
-}
-
-const props = defineProps<{ weatherData: WeatherProps }>();
 </script>
 
 <template>
@@ -59,14 +49,14 @@ const props = defineProps<{ weatherData: WeatherProps }>();
         <Link :href="route('top')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Top</Link>
         <Link :href="route('hello')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Hello</Link>
         <Link :href="route('products')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Products</Link>
-        <Link :href="route('vendors')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Vendors</Link>
-        <Link :href="route('requests')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Requests</Link>
+        <!-- <Link :href="route('vendors')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Vendors</Link> -->
+        <!-- <Link :href="route('requests')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">Requests</Link> -->
       </div>
-      <div>
-        <Link :href="route('vendors.create')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">仕入先登録</Link>
-        <Link :href="route('products.create')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">商品登録</Link>
-        <Link :href="route('sign-in')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">サインイン</Link>
-      </div>
+      <!-- <div> -->
+        <!-- <Link :href="route('vendors.create')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">仕入先登録</Link> -->
+        <!-- <Link :href="route('products.create')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">商品登録</Link> -->
+        <!-- <Link :href="route('sign-in')" class="px-4 py-2 mr-2 text-white bg-indigo-500 rounded-lg">サインイン</Link> -->
+      <!-- </div> -->
     </footer>
   </div>
 </template>

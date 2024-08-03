@@ -6,19 +6,42 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\Vendor;
+use App\Services\WeatherService;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    // 天気予報
+    protected $weatherService;
+    protected $weatherData;
+
+    public function __construct(WeatherService $weatherService)
+    {
+        $this->weatherService = $weatherService;
+        $this->weatherData = $this->weatherService->getWeatherData();
+    }
+    // 天気予報ここまで
+
     public function index()
     {
         $columns = Schema::getColumnListing('products');
-        $products = Product::get();
-        return view('products.index', compact('columns', 'products'));
+        $products = Product::all();
+
+        // ブレードバージョン
+        //return view('products.index', compact('columns', 'products'));
+
+        // Vue.jsバージョン
+        
+        return Inertia::render('Products/Index', [
+            'weatherData' => $this->weatherData,
+            'columns' => $columns,
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -52,7 +75,18 @@ class ProductController extends Controller
     {
         $columns = Schema::getColumnListing('products');
         $product = Product::find($id);
+
+        // ブレードバージョン
         return view('products.index', compact('columns', 'product'));
+
+        // Vue.jsバージョン
+        /*
+        return Inertia::render('Products/Index', [
+            'weatherData' => $this->weatherData,
+            'columns' => $columns,
+            'product' => $product,
+        ]);
+        */
     }
 
     /**
